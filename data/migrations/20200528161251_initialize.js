@@ -38,7 +38,7 @@ exports.up = function (knex) {
         .references("units.id")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-      //tbl.unique(["recipe_id", "ingredient_id"]);
+      // tbl.primary(["recipe_id", "ingredient_id"]);
     })
     .createTable("steps", tbl => {
       tbl.increments("id");

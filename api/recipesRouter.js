@@ -47,10 +47,6 @@ router.get(
           return ac;
         }, [])
       )
-      .then(x => {
-        console.log(x);
-        return x;
-      })
       .then(list =>
         list.map(item =>
           !Array.isArray(item.amount)
@@ -103,3 +99,4 @@ async function validateRecipeID(req, res, next) {
 }
 
 module.exports = router;
+

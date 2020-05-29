@@ -54,17 +54,13 @@ router.get(
                 ...item,
                 amount: `${item.amount.quantity}${
                   item.amount.unit ? " " + item.amount.unit : ""
-                }${
-                  item.amount.unit ? (item.amount.quantity == 1 ? "" : "s") : ""
-                }`,
+                }${item.amount.unit && item.amount.quantity != 1 ? "s" : ""}`,
               }
             : {
                 ...item,
                 amount: item.amount
                   .reduce((ac, val) => {
-                    const existingUnit = ac.find(
-                      x => x.unit && x.unit === val.unit
-                    );
+                    const existingUnit = ac.find(x => x.unit === val.unit);
                     existingUnit
                       ? (existingUnit.quantity =
                           Number(existingUnit.quantity) + Number(val.quantity))
@@ -76,7 +72,7 @@ router.get(
                       ac +
                       `${ac === "" ? "" : " +"} ${amount.quantity}${
                         amount.unit ? " " + amount.unit : ""
-                      }${amount.quantity != 1 ? "s" : ""}`,
+                      }${amount.unit && amount.quantity != 1 ? "s" : ""}`,
                     ""
                   ),
               }
@@ -99,4 +95,3 @@ async function validateRecipeID(req, res, next) {
 }
 
 module.exports = router;
-
